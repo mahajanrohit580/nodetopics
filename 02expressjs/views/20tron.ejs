@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+    <body>
+       <button  class="pay-button">Pay</button>
+        <div id="status"></div>
+    <script>
+    $('.pay-button').click(() => {
+        var obj = setInterval(async ()=>{
+            if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+                 clearInterval(obj)
+                var tronweb = window.tronWeb
+                var tx = await tronweb.transactionBuilder.sendTrx('TZC6KrcK6iiMxV53HiaURNrCa4BQaonJgr', 100, 'TCusrAUFUeQBLtCNB6XAC9oeqh9X2xvkML')
+                var signedTx = await tronweb.trx.sign(tx)
+                var broastTx = await tronweb.trx.sendRawTransaction(signedTx)
+                // var details = tronWeb.trx.getTransaction('TCusrAUFUeQBLtCNB6XAC9oeqh9X2xvkML');
+            //   $('#status').html('details')
+                console.log(broastTx)
+            }
+        }, 10)
+        })
+    </script>
+    </body>
+</html>
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    </head>
+    <body>
+    <button onclick="gettronweb()">Can you get tronweb from tronlink?</button>
+    <script>
+        function gettronweb(){
+            if(window.tronWeb && window.tronWeb.defaultAddress.base58){
+                document.write("Yes, catch it:",window.tronWeb.defaultAddress.base58)
+            }
+        }
+    </script>
+    </body>
+</html> -->

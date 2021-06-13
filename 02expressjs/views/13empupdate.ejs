@@ -1,0 +1,14 @@
+<body>
+    <form method="POST" action="/xyz/<%= editdata._id%>">
+        <center><h5>UPDATE EMPDATA</h5></center>
+        <fieldset>
+            <% if(err !==''){%><%=err%><%}%><br>
+           NAME<br><input type="text" name="name" value="<%= editdata.empname %>"><br>
+           IDNO <br><input type="text" name="idno" value="<%= editdata.empid %>"><br>
+           PERHOURRATE<br><input type="text" name="perhourrate" value="<%= editdata.perhourrate %>"><br>
+           TOTALHOURE<br> <input type="text" name="totalhour" value="<%= editdata.totalhour %>" ><br>
+          <input type="submit"value="update"><br>
+         Back to Employeedetails : <a href="/profile">Empdata</a>
+        </fieldset>
+    </form>
+</body>

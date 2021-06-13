@@ -1,0 +1,43 @@
+<body>
+   
+        <center> ALL THE EMPLOYEE DETAIL"S</center><br>
+        <% if( del !=='') {%>
+            <%= del %>
+            <%}%>
+        <form  method="POST" action="/search">
+           <center> <b>Search By : </b><br>
+            NAME<input type="text" name="sername" placeholder="Enter The Name">
+            EMPID<input type="text" name="serid" placeholder="Enter The ID">
+            <input type="submit" value="Search"></center> 
+        </form>
+        <form >
+       <center><table border="20px">
+            <tr>
+                <th>NAME</th>
+                <th>EMPID</th>
+                <th>PERHOURRATE</th>
+                <th>TOTALHOUR</th>
+                <th>SALARY</th>
+            </tr>
+            <tr>
+                <% if(mgs.length>0){ %>
+                <% mgs.forEach(function(item){
+                %><tr>
+                     <td><%= item.empname %></td>
+                     <td><%= item.empid %></td>
+                     <td><%= item.perhourrate %></td>
+                     <td><%= item.totalhour %></td>
+                     <td><%= item.t %></td>
+                     <td><a href="/edit/<%= item._id %>">edit</a></td>
+                     <td><a href="/deletedata/<%= item._id %>">delete</a></td>
+                  </tr><br><%
+                }) } else{%>
+                     <tr>
+                         <td colspan="5">NO RecordFound....!!</td>
+                     </tr>
+                    <%}%> 
+        </table><br>
+        Enter the new data : <a href="/regform">Enter Data</a>
+    </center>
+    </form>
+</body>

@@ -1,0 +1,20 @@
+<body>
+   <form action="/uploadedimage" method="POST" enctype="multipart/form-data">
+      
+   <fieldset>
+      <% if(mgs!==''){ %>
+        <%= mgs %>
+        <% } %>
+     <br>
+     <input type="file" name="fileupload"><br>
+     <input type="submit" value="upload"><br>
+   </fieldset>
+
+            <% if(sucess.length>0){ %>
+              <% sucess.forEach(function(ssss){ %>
+        <img src="./uploads/<%= ssss.imgname %>"  alt="<%=ssss.imgname %>" width="100" height="100" >
+            <% }); } %>
+
+
+</form>
+</body>

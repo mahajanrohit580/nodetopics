@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <form method="post" >
+    <h1>loggin page</h1><br>
+    <input type="email" name="email" placeholder="enter the email" value= <%= ref.email %> ><br>
+    <%if(error.email){%>
+        <span><%=error.email.msg%></span>
+        <%}%>
+        <br>
+   
+    <input type="text" name="password" placeholder="enter the password"><br>
+    <%if(error.password){%>
+        <span><%=error.password.msg%></span>
+        <%}%>
+        <br>
+    
+    
+    <input type="text" name="cpassword" placeholder="enter the cpassword"><br>
+    <%if(error.cpassword){%>
+        <span><%=error.cpassword.msg%></span>
+        <%}%><br>
+    <input type="submit">
+   </form>  
+</body>
+</html>

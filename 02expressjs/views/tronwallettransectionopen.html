@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+    <body>
+       <button  class="pay-button">Pay</button>
+        <div id="status"></div>
+    <script>
+    $('.pay-button').click(() => {
+        var obj = setInterval(async ()=>{
+            if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+                clearInterval(obj)
+                var tronweb = window.tronWeb
+                var tx = await tronweb.transactionBuilder.sendTrx('TTBMg3v3GM33gc1nBD4Ujauk23AYaoLGf1', 10, 'TG9SBvEEKAqVGKKAzeVvCiBtmdzoj8bAdb')
+                var signedTx = await tronweb.trx.sign(tx)
+                var broastTx = await tronweb.trx.sendRawTransaction(signedTx)
+                var details = tronWeb.trx.getTransaction('TG9SBvEEKAqVGKKAzeVvCiBtmdzoj8bAdb');
+              $('#status').html('details')
+                console.log(broastTx.result.transaction.txID)
+            }
+        }, 10)
+        })
+    </script>
+    </body>
+</html>

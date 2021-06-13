@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+</head>
+<body>
+  <div>
+    <button class="pay-button">Pay</button>
+    <div id="status"></div>
+  </div>
+  <script type="text/javascript">
+    window.addEventListener('load', async () => {
+      if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+          await ethereum.enable();
+          initPayButton()
+        } catch (err) {
+          $('#status').html('User denied account access', err)
+        }
+      }else if (window.web3) {
+        //window.ethereum.isTrust
+        window.web3 = new Web3(web3.currentProvider)
+        initPayButton()
+      } else {
+        $('#status').html('No Metamask (or other Web3 Provider) installed')
+      }
+    })
+
+    const initPayButton = () => {
+      $('.pay-button').click(() => {
+        // paymentAddress is where funds will be send to
+        const paymentAddress = '0xd1613557d9c66516bc1fB7642055276886e120b9'
+        const amountEth = "0.666"
+
+        web3.eth.sendTransaction({
+          from: "0xd1613557d9c66516bc1fB7642055276886e120b9",
+          to: paymentAddress,
+          value: web3.utils.toWei(amountEth, 'ether')
+        }, (err, transactionId) => {
+          if  (err) {
+            console.log('Payment failed', err)
+            $('#status').html('Payment failed')
+          } else {
+            console.log('Payment successful', transactionId)
+            $('#status').html('Payment successful')
+          }
+        })
+        // web3.eth.signTransaction({
+        //       from: "0xd1613557d9c66516bc1fB7642055276886e120b9",
+        //       gasPrice: "20000000000",
+        //       gas: "21000",
+        //       to: '0x5944e6dC605BBdC3B18b1cfcaE64A9D8e7306be3',
+        //       value:  web3.utils.toWei('0.01', 'ether')
+        //   }, '065ed0beada6239b0775752c439f0c039f26f62253effdc2e72be1102c61dbdc').then(console.log);
+        //   web3.eth.accounts.signTransaction({
+        //     from: "0xd1613557d9c66516bc1fB7642055276886e120b9",
+        //     to: '0x5944e6dC605BBdC3B18b1cfcaE64A9D8e7306be3',
+        //     value:  web3.utils.toWei('0.01', 'ether'),
+        //     gas: 2000000
+        // }, '065ed0beada6239b0775752c439f0c039f26f62253effdc2e72be1102c61dbdc')
+        // .then(console.log);
+        // web3.eth.sendTransaction({
+        //       from: "0xd1613557d9c66516bc1fB7642055276886e120b9",
+        //       gasPrice: "20000000000",
+        //       gas: "21000",
+        //       to: '0x5944e6dC605BBdC3B18b1cfcaE64A9D8e7306be3',
+        //       value: "1000000000000000000",
+        //       data: ""
+        //   }, '065ed0beada6239b0775752c439f0c039f26f62253effdc2e72be1102c61dbdc').then(console.log);
+      })
+    }
+  </script>
+</body>
+</html>
